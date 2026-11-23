@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Lumière Botanicals</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="admin-body">
+
+  <!-- Password Protection Screen -->
+  <div id="admin-login-screen" class="login-wrapper">
+    <div class="login-card">
+      <h2>Store Admin Login</h2>
+      <p>Default Password: <code>admin123</code></p>
+      <form id="admin-login-form">
+        <input type="password" id="admin-password-input" placeholder="Enter Admin Password" required />
+        <button type="submit" class="btn btn-primary full-width">Unlock Dashboard</button>
+      </form>
+      <a href="index.html" class="back-link">&larr; Back to Store</a>
+    </div>
+  </div>
+
+  <!-- Main Admin Interface -->
+  <div id="admin-dashboard" class="hidden">
+    <header class="navbar">
+      <div class="container nav-content">
+        <span class="logo">Lumière<span>.</span> Admin</span>
+        <div class="nav-actions">
+          <a href="index.html" target="_blank" class="btn btn-outline">View Live Store</a>
+          <button id="logout-btn" class="btn btn-danger-outline">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container section-padding admin-grid">
+      
+      <!-- Left Column: Store Settings -->
+      <section class="admin-card">
+        <h3>Store & Checkout Settings</h3>
+        <form id="store-settings-form">
+          <div class="form-group">
+            <label>Store Name</label>
+            <input type="text" id="set-store-name" required />
+          </div>
+          <div class="form-group">
+            <label>Hero Tagline</label>
+            <input type="text" id="set-hero-tag" required />
+          </div>
+          <div class="form-group">
+            <label>Hero Main Headline</label>
+            <input type="text" id="set-hero-title" required />
+          </div>
+          <div class="form-group">
+            <label>Hero Subtitle</label>
+            <textarea id="set-hero-subtitle" rows="2" required></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Global Shipping Fee ($)</label>
+              <input type="number" step="0.01" id="set-shipping-fee" required />
+            </div>
+            <div class="form-group">
+              <label>WhatsApp Number (with country code, no +)</label>
+              <input type="text" id="set-whatsapp" placeholder="15551234567" required />
+            </div>
+          </div>
+
+          <h4>Social Media Links</h4>
+          <div class="form-group">
+            <label>Instagram URL</label>
+            <input type="url" id="set-instagram" />
+          </div>
+          <div class="form-group">
+            <label>Facebook URL</label>
+            <input type="url" id="set-facebook" />
+          </div>
+          <div class="form-group">
+            <label>TikTok URL</label>
+            <input type="url" id="set-tiktok" />
+          </div>
+          <div class="form-group">
+            <label>Snapchat URL</label>
+            <input type="url" id="set-snapchat" />
+          </div>
+
+          <button type="submit" class="btn btn-primary full-width">Save Store Settings</button>
+        </form>
+      </section>
+
+      <!-- Right Column: Add / Edit Product & Product List -->
+      <section class="admin-card">
+        <h3 id="product-form-title">Add New Product</h3>
+        <form id="product-form">
+          <input type="hidden" id="prod-id" />
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label>Product Name *</label>
+              <input type="text" id="prod-name" placeholder="Lavender Body Butter" required />
+            </div>
+            <div class="form-group">
+              <label>Price ($) *</label>
+              <input type="number" step="0.01" id="prod-price" placeholder="24.00" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Category *</label>
+            <select id="prod-category">
+              <option value="skincare">Skincare</option>
+              <option value="bodycare">Body Care</option>
+              <option value="sets">Gift Sets</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Short Description *</label>
+            <textarea id="prod-desc" rows="2" placeholder="Deeply hydrating organic formula..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Upload Product Image (from Device)</label>
+            <input type="file" id="prod-image-file" accept="image/*" />
+          </div>
+
+          <div class="form-group">
+            <label>Or Paste Image URL</label>
+            <input type="url" id="prod-image-url" placeholder="https://example.com/image.jpg" />
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="save-prod-btn">Add Product</button>
+            <button type="button" class="btn btn-outline hidden" id="cancel-edit-btn">Cancel Edit</button>
+          </div>
+        </form>
+
+        <hr class="divider" />
+
+        <div class="list-header">
+          <h3>Current Inventory (<span id="inventory-count">0</span>)</h3>
+          <button id="reset-defaults-btn" class="text-btn">Reset Default Data</button>
+        </div>
+        <div id="admin-product-list" class="admin-product-list">
+          <!-- Inventory rendered here -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
